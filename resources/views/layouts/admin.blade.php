@@ -10,6 +10,13 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <script type="{{ asset('text/javascript') }}" src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('js/lumino.glyphs.js') }}"></script>
+    <script src="https://cdn.tiny.cloud/1/hhj1brjre6ca1c4cuvm70rrgwgdf5d3ajel9yk64iyzraf4o/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea'
+        });
+
+    </script>
 </head>
 
 <body>
@@ -60,6 +67,7 @@
     <!--/.sidebar-->
 
     @yield('content')
+
     <script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/chart.min.js') }}"></script>

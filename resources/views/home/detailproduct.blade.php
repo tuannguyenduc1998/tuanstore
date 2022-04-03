@@ -27,7 +27,7 @@
     </div>
     <div id="product-detail">
         <h3>Chi tiết sản phẩm</h3>
-        <p class="text-justify">{{$product->description}}</p>
+        <p class="text-justify">{!! $product->description !!}</p>
     </div>
     <div id="comment">
         <h3>Bình luận</h3>

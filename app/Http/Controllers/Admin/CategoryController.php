@@ -26,7 +26,8 @@ class CategoryController extends Controller
             'name'=> ['required','unique:categories']
         ],
         [
-            'unique'=>':attribute không được trùng'
+            'unique'=>':attribute không được trùng',
+            'required'=> ':attribute không được để trống'
         ],
         [
             'name'=> 'Tên danh mục'
@@ -36,7 +37,7 @@ class CategoryController extends Controller
             'name'=> $request->input('name'),
             'slug'=> Str::slug($request->input('name'))
         ]);
-        return redirect('admin/category');
+        return redirect('admin/category')->with('status', 'Thêm danh mục thành công!');;
     }
 
     function edit($id){
@@ -49,12 +50,12 @@ class CategoryController extends Controller
             'name'=> $request->input('name'),
             'slug'=> Str::slug($request->input('name'))
         ]);
-        return redirect('admin/category');
+        return redirect('admin/category')->with('status', 'Cập nhật danh mục thành công!');;
     }
 
     function delete($id){
         Category::where('id', $id)
         ->delete();
-        return redirect('admin/category');
+        return redirect('admin/category')->with('status', 'Xóa danh mục thành công!');;
     }
 }

@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 @section('content')
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        @if (session('status'))
+            <div class="alert alert-success">{{ session('status') }}</div>
+        @endif
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Danh mục sản phẩm</h1>
@@ -21,7 +24,7 @@
                                 <label>Tên danh mục:</label>
                                 <input type="text" name="name" class="form-control" placeholder="Tên danh mục...">
                                 @error('name')
-                                    <small class="text-danger">{{$message}}</small>
+                                    <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                             <button class="btn btn-primary form-control" type="submit" value="Thêm mới">Thêm mới</button>
@@ -47,9 +50,11 @@
                                         <tr>
                                             <td>{{ $category->name }}</td>
                                             <td>
-                                                <a href={{ route('category.edit', ['id'=>$category->id]) }} class="btn btn-warning"><span
-                                                        class="glyphicon glyphicon-edit"></span> Sửa</a>
-                                                <a href={{ route('category.delete', ['id'=>$category->id]) }} onclick="return confirm('Bạn có chắc chắn muốn xóa?')"
+                                                <a href={{ route('category.edit', ['id' => $category->id]) }}
+                                                    class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span>
+                                                    Sửa</a>
+                                                <a href={{ route('category.delete', ['id' => $category->id]) }}
+                                                    onclick="return confirm('Bạn có chắc chắn muốn xóa?')"
                                                     class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
                                                     Xóa</a>
                                             </td>

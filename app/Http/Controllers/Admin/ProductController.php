@@ -28,18 +28,28 @@ class ProductController extends Controller
     }
 
     function add(Request $request){
-        $input = $request->all();
-        $input['slug'] = Str::slug($request->input('name'));
         if($request->hasFile('img')){
             $image = $request->img;
             $filename = $image->getClientOriginalName();
             $image = 'img/'.$filename;
-            $input['image'] = $image;
+            $imagename = $image;
         }
-        $input['category_id'] = $request->input('category');
-        Product::create($input);
+        Product::create([
+            'name'=> $request->input('name'),
+            'slug'=> Str::slug($request->input('name')),
+            'price'=> $request->input('price'),
+            'image'=> $imagename,
+            'accessories'=> $request->input('accessories'),
+            'warranty'=> $request->input('warranty'),
+            'promotion'=> $request->input('promotion'),
+            'condition'=> $request->input('condition'),
+            'status'=> $request->input('status'),
+            'description'=> $request->input('description'),
+            'category_id'=> $request->input('category'),
+            'featured'=> $request->input('featured'),
+        ]);
         $request->img->move('public/img/', $filename);
-        return redirect('admin/product');
+        return redirect('admin/product')->with('status', 'Thêm sản phẩm thành công!');;
     }
 
     function edit($id){
@@ -75,13 +85,13 @@ class ProductController extends Controller
         if($product->image != $imagename){
             $request->img->move('public/img/', $filename);
         }
-        return redirect('admin/product');
+        return redirect('admin/product')->with('status', 'Cập nhật sản phẩm thành công!');;
     }
 
     function delete($id)
     {
         Product::where('id', $id)
         ->delete();
-        return redirect('admin/product');
+        return redirect('admin/product')->with('status', 'Xóa sản phẩm thành công!');
     }
 }

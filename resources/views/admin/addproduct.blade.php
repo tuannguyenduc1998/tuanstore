@@ -1,13 +1,9 @@
 @extends('layouts.admin')
 @section('content')
-    {{-- <script src="https://cdn.tiny.cloud/1/hhj1brjre6ca1c4cuvm70rrgwgdf5d3ajel9yk64iyzraf4o/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-            selector: 'textarea'
-        });
-
-    </script> --}}
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        @if (session('status'))
+            <div class="alert alert-success">{{ session('status') }}</div>
+        @endif
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Sản phẩm</h1>
@@ -21,7 +17,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">Thêm sản phẩm</div>
                     <div class="panel-body">
-                        <form action="{{route('product.add')}}" enctype="multipart/form-data" method="POST">
+                        <form action="{{ route('product.add') }}" enctype="multipart/form-data" method="POST">
                             @csrf
                             <div class="row" style="margin-bottom:40px">
                                 <div class="col-xs-8">
@@ -72,7 +68,7 @@
                                         <select required name="category" class="form-control">
                                             <option>Chọn</option>
                                             @foreach ($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -81,7 +77,8 @@
                                         Có: <input type="radio" name="featured" value="1">
                                         Không: <input type="radio" checked name="featured" value="0">
                                     </div>
-                                    <button type="submit" name="submit" value="Thêm mới" class="btn btn-primary">Thêm mới</button>
+                                    <button type="submit" name="submit" value="Thêm mới" class="btn btn-primary">Thêm
+                                        mới</button>
                                     <a href="#" class="btn btn-danger">Hủy bỏ</a>
                                 </div>
                             </div>
@@ -94,13 +91,13 @@
         <!--/.row-->
     </div>
     <!--/.main-->
-    <script src="{{ asset('js/jquery-1.11.1.min.js')}}"></script>
-    <script src="{{ asset('js/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('js/chart.min.js')}}"></script>
-    <script src="{{ asset('js/chart-data.js')}}"></script>
-    <script src="{{ asset('js/easypiechart.js')}}"></script>
-    <script src="{{ asset('js/easypiechart-data.js')}}"></script>
-    <script src="{{ asset('js/bootstrap-datepicker.js')}}"></script>
+    <script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/chart.min.js') }}"></script>
+    <script src="{{ asset('js/chart-data.js') }}"></script>
+    <script src="{{ asset('js/easypiechart.js') }}"></script>
+    <script src="{{ asset('js/easypiechart-data.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
     <script>
         $('#calendar').datepicker({});
         ! function($) {
